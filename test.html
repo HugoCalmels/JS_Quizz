@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <style>
+    .large{
+      width: 200px;
+      height: 200px;
+      background: red;
+      margin-left: 500px;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="domNode">
+    <div class="large square el"></div>
+  </div>
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+  <script>
+var el = document.querySelector('#domNode .el');
+
+var domNode = anime({
+  targets: el,
+  easing: 'easeInOutQuart',
+  keyframes: [
+    {translateX: -10},
+    {translateX: 20},
+    {translateX: -20},
+    {translateX: 20},
+    {translateX: -20},
+    {translateX: 20},
+    {translateX: -20},
+    {translateX: 20},
+    {translateX: -20},
+    {translateX: 20},
+    {translateX: -20},
+    {translateX: 20},
+    {translateX: -20},
+    {translateX: 20},
+    {translateX: -10},
+  ],
+  
+  duration: 1000,
+});
+  </script>
+</body>
+</html>
