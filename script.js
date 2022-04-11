@@ -3,7 +3,6 @@ const selectElement = document.querySelector('#select-element')
 const selectWrapper = document.querySelector('.select-wrapper')
 const sectionQuestions = document.querySelector('.questions-section')
 let storageData = JSON.parse(localStorage.getItem('quizz')) || []
-
 let howMuchQuestion = 0
 
 // url
@@ -13,32 +12,24 @@ const url = 'https://opentdb.com/api.php?amount='
 // début de la séquence
 // ------------
 
-let count = 0
-
 startGame()
 
 function startGame() {
 
-  
   askForName().then((nameResponse) => {
     let speCount = 0
     initializeSelectOptions() 
-    
     selectElement.addEventListener('change', (event) => {
       event.preventDefault()
 
       if (event.target.value !== '-') { // je veux pas fetch sur '-'
-      speCount += 1
-      
+      speCount += 1 // else the select goes crazy
         if (speCount === 1) {
           moveToRight(selectWrapper)
           setTimeout(() => {
             hideSelect()
             getNumberOfQuestions(event.target.value)
               .then((data) => {
-            console.log('?????????????????')
-                console.log(data)
-                console.log('?????????????????')
             createNumberQuestion(event.target.value, data)
           })
           // selectionner la 1ere equestion
@@ -206,10 +197,6 @@ function initializeSelectOptions() {
 
 
 async function getNumberOfQuestions(number) {
-  console.log('lLLLLLLLLLLLLLLLLLLLLLL')
-  console.log('this should trigger only once')
-  console.log(number)
-  console.log('lLLLLLLLLLLLLLLLLLLLLLL')
     const response = await fetch(`${url}${number}`)
     const data = await response.json()
     return data
@@ -471,7 +458,6 @@ function displayShowScore() {
     Hall of Fame
   `
   sectionQuestions.appendChild(button)
-  console.log(document.querySelector('.display-results'))
   button.addEventListener('click', () => {
     displayButtonPlayAgain()
     slowlyHide()
@@ -501,7 +487,6 @@ function displayShowScore() {
       `
       scoreContent.appendChild(scoreRow)
     })
-    console.log(document.querySelector('.display-results'))
     slowlyShowScore()
   })
 }
@@ -527,7 +512,6 @@ function resetGame() {
   let divResults = document.querySelector('.score')
   divResults.remove()
   let oldQuestions = document.querySelectorAll('.question-element')
-  console.log(oldQuestions)
   oldQuestions.forEach((e) => e.remove())
   moveBack(selectWrapper)
   startGame()
